@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Reminder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 2.5em;
+            color: #444;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-size: 1.1em;
+            margin-bottom: 5px;
+            display: inline-block;
+            color: #444;
+        }
+
+        input[type="email"],
+        input[type="text"],
+        input[type="time"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-top: 5px;
+        }
+
+        input[type="text"] {
+            font-size: 1em;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1.2em;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            color: #e74c3c;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        .message-container {
+            margin-top: 20px;
+        }
+
+        .message-container ul {
+            background-color: #f8d7da;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+    <script>
+        function disableSubmitButton() {
+            let submitBtn = document.getElementById("submitBtn");
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Saving...";
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Class Reminder</h1>
+
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="message-container">
+                    <ul>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <form action="/" method="post" onsubmit="disableSubmitButton()">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="class_name">Class Name:</label>
+                <input type="text" id="class_name" name="class_name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="class_days">Class Days (e.g., 0,2,4 for Mon, Wed, Fri):</label>
+                <input type="text" id="class_days" name="class_days" required>
+            </div>
+
+            <div class="form-group">
+                <label for="timezone">Time Zone (e.g., America/New_York):</label>
+                <input type="text" id="timezone" name="timezone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="class_time">Class Time (HH:MM 24hr format):</label>
+                <input type="time" id="class_time" name="class_time" required>
+            </div>
+
+            <div class="form-group">
+                <label for="professor">Professor:</label>
+                <input type="text" id="professor" name="professor" required>
+            </div>
+
+            <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" required>
+            </div>
+
+            <button type="submit" id="submitBtn">Save Class</button>
+        </form>
+    </div>
+
+</body>
+</html>
+
